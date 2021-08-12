@@ -10,8 +10,8 @@ export class TaskListComponent implements OnInit {
     'send an email to manju on solution 2.0',
     'complete integration work by 3PM',
   ];
-  constructor() {}
   id: any;
+  constructor() {}
   ngOnInit(): void {}
 
   addTask(taskName: string) {

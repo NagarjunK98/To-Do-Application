@@ -22,7 +22,7 @@
         <h2 class="heading">Pending Tasks...</h2>
         <div *ngFor="let task of tasksList; let i = index" class="content">
           <h3>
-            {{ task }}
+            {{ i + 1 }}. {{ task }}
             <button mat-button class="mark-button">
               <mat-icon>star_border</mat-icon>
             </button>
