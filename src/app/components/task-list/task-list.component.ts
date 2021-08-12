@@ -6,21 +6,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit {
-  tasksList: string[] = [
-    'send an email to manju on solution 2.0',
+  pendingTasksList: string[] = [
+    'send an email to project manager on feature enhancements',
     'complete integration work by 3PM',
   ];
-  id: any;
+  completedTasksList: string[] = [
+    'Work on App engine',
+    'Research on deployment strategies',
+  ];
   constructor() {}
   ngOnInit(): void {}
 
   addTask(taskName: string) {
-    this.tasksList.push(taskName);
+    this.pendingTasksList.push(taskName);
   }
 
   deleteTask(id: number) {
-    console.log('deleted task id: ', id);
-    console.log('Task name is: ', this.tasksList[id]);
-    this.tasksList.splice(id, 1);
+    let taskName = this.pendingTasksList[id];
+    this.pendingTasksList.splice(id, 1);
+    this.archiveTask(taskName);
+  }
+
+  archiveTask(taskName: string) {
+    this.completedTasksList.push(taskName);
+  }
+
+  unarchiveTask(id: number) {
+    let taskName = this.completedTasksList[id];
+    this.completedTasksList.splice(id, 1);
+    this.addTask(taskName);
   }
 }
