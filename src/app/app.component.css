@@ -1,4 +1,5 @@
 body {
   background-color: ghostwhite;
   width: 100%;
+  overflow-x: hidden;
 }
