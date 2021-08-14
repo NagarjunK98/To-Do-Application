@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
 
+## Deploy on Google Cloud App Engine
+
+To deploy the To-Do application on App engine follow the below steps:
+
+1. Create a GCP Project or use existing one
+2. Create App Engine by selecting a nearest region to you (`Note: region is permanent`)
+3. From command line run `npm run build` to build `dist` folder
+4. Go to `app.yaml` file and replace `service` with your service name or specify new one it will be created
+5. Login to GCP account by using  `gcloud auth login`
+6. On successfull login to GCP, from the project folder run `gcloud app deploy --project=<YOUR_GCP_PROJECT_ID>`
+7. To view the deployed app engine service, run `gcloud app browse -s <YOUR_SERVICE_NAME>`
+
 ## Hosted Server
 
 This project is hosted on github pages. Visit https://nagarjun14.github.io/ page to access online.
