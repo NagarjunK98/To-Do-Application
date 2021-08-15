@@ -9,37 +9,67 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class TaskListComponent implements OnInit {
   constructor(private snackBar: MatSnackBar) {}
 
-  ngOnInit(): void {}
+  pendingTasks: string[] = [];
+  completedTasks: string[] = [];
 
-  pendingTasksList: string[] = [
-    'send an email to project manager on feature enhancements',
-    'complete integration work by 3PM',
-  ];
-  completedTasksList: string[] = [
-    'Work on App engine',
-    'Research on deployment strategies',
-  ];
+  ngOnInit() {
+    if (localStorage.getItem('pendingTasks') === null) {
+      this.setTasksDetails('pendingTasks', []);
+    } else {
+      this.pendingTasks = this.getTasksDetails('pendingTasks');
+    }
+    if (localStorage.getItem('completedTasks') === null) {
+      this.setTasksDetails('completedTasks', []);
+    } else {
+      this.completedTasks = this.getTasksDetails('completedTasks');
+    }
+  }
+
+  getTasksDetails(taskType: string) {
+    let tasks = localStorage.getItem(taskType);
+    let taskList = tasks !== null ? JSON.parse(tasks) : '{}';
+    return taskList;
+  }
+
+  setTasksDetails(taskType: string, details: string[]) {
+    localStorage.setItem(taskType, JSON.stringify(details));
+  }
 
   addTask(taskName: string) {
-    this.pendingTasksList.push(taskName);
+    this.pendingTasks = this.getTasksDetails('pendingTasks');
+    this.pendingTasks.push(taskName);
+    this.setTasksDetails('pendingTasks', this.pendingTasks);
     this.taskStatus('Task added to list', 'Close');
   }
 
   deleteTask(id: number) {
-    let taskName = this.pendingTasksList[id];
-    this.pendingTasksList.splice(id, 1);
+    this.pendingTasks = this.getTasksDetails('pendingTasks');
+    let taskName = this.pendingTasks[id];
+    this.pendingTasks.splice(id, 1);
+    this.setTasksDetails('pendingTasks', this.pendingTasks);
     this.archiveTask(taskName);
     this.taskStatus('Task marked as complete', 'Close');
   }
 
   archiveTask(taskName: string) {
-    this.completedTasksList.push(taskName);
+    this.completedTasks = this.getTasksDetails('completedTasks');
+    this.completedTasks.push(taskName);
+    this.setTasksDetails('completedTasks', this.completedTasks);
   }
 
   unarchiveTask(id: number) {
-    let taskName = this.completedTasksList[id];
-    this.completedTasksList.splice(id, 1);
+    this.completedTasks = this.getTasksDetails('completedTasks');
+    let taskName = this.completedTasks[id];
+    this.completedTasks.splice(id, 1);
+    this.setTasksDetails('completedTasks', this.completedTasks);
     this.addTask(taskName);
+  }
+
+  archiveDelete(id: number) {
+    this.completedTasks = this.getTasksDetails('completedTasks');
+    this.completedTasks.splice(id, 1);
+    this.setTasksDetails('completedTasks', this.completedTasks);
+    this.taskStatus('Task deleted', 'Close');
   }
 
   taskStatus(message: string, action: string) {

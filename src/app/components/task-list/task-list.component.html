@@ -3,17 +3,11 @@
     <mat-card class="card">
       <mat-card-content>
         <h2 class="heading">Pending Tasks</h2>
-        <div
-          *ngFor="let task of pendingTasksList; let i = index"
-          class="content"
-        >
+        <div *ngFor="let task of pendingTasks; let i = index" class="content">
           <h3>
             {{ i + 1 }}. {{ task }}
-            <button mat-button class="mark-button">
-              <mat-icon>star_border</mat-icon>
-            </button>
             <button mat-button class="done-button" (click)="deleteTask(i)">
-              <mat-icon>delete</mat-icon>
+              <mat-icon>check_circle</mat-icon>
             </button>
             <mat-divider></mat-divider>
           </h3>
@@ -26,15 +20,15 @@
     <mat-card class="card">
       <mat-card-content>
         <h2 class="heading">Completed Tasks</h2>
-        <div
-          *ngFor="let task of completedTasksList; let i = index"
-          class="content"
-        >
+        <div *ngFor="let task of completedTasks; let i = index" class="content">
           <s
             ><h3>
               {{ i + 1 }}. {{ task }}
               <button mat-button class="done-button">
                 <mat-icon (click)="unarchiveTask(i)">undo</mat-icon>
+              </button>
+              <button mat-button class="mark-button">
+                <mat-icon (click)="archiveDelete(i)">delete</mat-icon>
               </button>
               <mat-divider></mat-divider></h3
           ></s>
