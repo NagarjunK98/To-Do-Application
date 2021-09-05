@@ -1,26 +1,28 @@
-div.main {
-  width: 100%;
-  margin-top: 1px;
-  margin-left: 15px;
-  padding: 20px;
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 1.5rem;
 }
+
 .list {
-  width: 45%;
-  float: left;
-  padding: 20px;
+  width: 48%;
 }
-div .card {
+
+.heading {
+  text-align: center;
+}
+
+.card {
   background-color: ghostwhite;
   overflow: auto;
   word-wrap: break-word;
-}
-div .heading {
-  text-align: center;
 }
 
 .content {
   position: relative;
 }
+
 .done-button {
   position: absolute;
   right: -10px;
@@ -30,4 +32,15 @@ div .heading {
   position: absolute;
   right: 29px;
   bottom: 3px;
+}
+
+@media screen and (max-width: 400px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
+  }
+  .list {
+    width: 90%;
+    margin-top: 1.5rem;
+  }
 }
