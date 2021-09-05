@@ -18,8 +18,6 @@ To deploy the To-Do application on App engine follow the below steps:
 
 This project is hosted on github pages. Visit https://nagarjun14.github.io/ page to access online.
 
-**Note:** `For better user experience, access the site from PC`
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
